@@ -50,7 +50,7 @@ void BOOST(const std::vector<int64_t> &program)
 	comp.inbox.push(2);
 	comp.executeProgram();
 
-			std::cout << "ResultB: " << '\n';
+	std::cout << "ResultB: " << '\n';
 	while(!comp.outbox.empty())
 	{
 		std::cout << comp.outbox.front() << std::endl;
