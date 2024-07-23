@@ -7,40 +7,46 @@
 
 class IntcodeComputer
 {
-	typedef void(IntcodeComputer::*opCode)(int, int, int, std::vector<int> &program, int&);
+	typedef void(IntcodeComputer::*opCode)(int64_t, int64_t, int64_t, std::array<int64_t, 10000> &program, int64_t&);
 
-	void add(int a, int b, int c, std::vector<int> &program, int &adressPtr);
+	void add(int64_t a, int64_t b, int64_t c, std::array<int64_t, 10000> &program, int64_t &adressPtr);
 
-	void mul(int a, int b, int c, std::vector<int> &program, int &adressPtr);
+	void mul(int64_t a, int64_t b, int64_t c, std::array<int64_t, 10000> &program, int64_t &adressPtr);
 
-	void in(int a, std::vector<int> &program, int &adressPtr);
+	void in(int64_t a, std::array<int64_t, 10000> &program, int64_t &adressPtr);
 
-	void in(int a, int b, int c, std::vector<int> &program, int &adressPtr);
+	void in(int64_t a, int64_t b, int64_t c, std::array<int64_t, 10000> &program, int64_t &adressPtr);
 
-	void out(int a, std::vector<int> &program, int &adressPtr);
+	void out(int64_t a, std::array<int64_t, 10000> &program, int64_t &adressPtr);
 
-	void out(int a, int b, int c, std::vector<int> &program, int &adressPtr);
+	void out(int64_t a, int64_t b, int64_t c, std::array<int64_t, 10000> &program, int64_t &adressPtr);
 
-	void jit(int a, int b, std::vector<int> &program, int &adressPtr);
+	void jit(int64_t a, int64_t b, std::array<int64_t, 10000> &program, int64_t &adressPtr);
 
-	void jit(int a, int b, int c, std::vector<int> &program, int &adressPtr);
+	void jit(int64_t a, int64_t b, int64_t c, std::array<int64_t, 10000> &program, int64_t &adressPtr);
 
-	void jif(int a, int b, std::vector<int> &program, int &adressPtr);
+	void jif(int64_t a, int64_t b, std::array<int64_t, 10000> &program, int64_t &adressPtr);
 
-	void jif(int a, int b, int c, std::vector<int> &program, int &adressPtr);
+	void jif(int64_t a, int64_t b, int64_t c, std::array<int64_t, 10000> &program, int64_t &adressPtr);
 
-	void les(int a, int b, int c, std::vector<int> &program, int &adressPtr);
+	void les(int64_t a, int64_t b, int64_t c, std::array<int64_t, 10000> &program, int64_t &adressPtr);
 
-	void equ(int a, int b, int c, std::vector<int> &program, int &adressPtr);
+	void equ(int64_t a, int64_t b, int64_t c, std::array<int64_t, 10000> &program, int64_t &adressPtr);
 
-	void initializeOpCodes(std::array<opCode,8> &opCodes);
+	void adj(int64_t a, std::array<int64_t, 10000> &program, int64_t &adressPtr);
 
-	unsigned determineMode(int op, int position);
+	void adj(int64_t a, int64_t b, int64_t c, std::array<int64_t, 10000> &program, int64_t &adressPtr);
+	
 
-	void loadValues(int op, int adress, int &a, int &b, int &c, std::vector<int> &program);
+	void initializeOpCodes(std::array<opCode,9> &opCodes);
 
-	std::array<opCode, 8> opCodes;
-	int adressPtr = 0;
+	unsigned determineMode(int64_t op, int64_t position);
+
+	void loadValues(int64_t op, int64_t adress, int64_t &a, int64_t &b, int64_t &c, std::array<int64_t, 10000> &program);
+
+	std::array<opCode,9> opCodes;
+	int64_t adressPtr = 0;
+	int64_t offset = 0;
 	bool opCodesInitialized = false;
 	
 	public:
@@ -48,11 +54,11 @@ class IntcodeComputer
 	IntcodeComputer();
 	
 	void executeProgram();
-	void loadProgram(std::vector<int> newProgram);
+	void loadProgram(const std::vector<int64_t> &newProgram);
 	
-	std::queue<int> inbox;
-	std::queue<int> outbox;
-	std::vector<int> program;
+	std::queue<int64_t> inbox;
+	std::queue<int64_t> outbox;
+	std::array<int64_t, 10000> program{0};
 	bool sleeping = false;
 };
 
