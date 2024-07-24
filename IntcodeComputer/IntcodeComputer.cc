@@ -192,6 +192,23 @@ void IntcodeComputer::loadValues(int64_t op, int64_t adress, int64_t &a, int64_t
 	}
 }
 
+void IntcodeComputer::pushValue(int64_t value)
+{
+	inbox.push(value);
+}
+
+int64_t IntcodeComputer::fetchValue()
+{
+	int64_t result = outbox.front();
+	outbox.pop();
+	return result;
+}
+
+bool IntcodeComputer::isSleeping()
+{
+	return sleeping;
+}
+
 void IntcodeComputer::executeProgram()
 {
 	sleeping = false;

@@ -36,7 +36,6 @@ class IntcodeComputer
 	void adj(int64_t a, std::array<int64_t, 10000> &program, int64_t &adressPtr);
 
 	void adj(int64_t a, int64_t b, int64_t c, std::array<int64_t, 10000> &program, int64_t &adressPtr);
-	
 
 	void initializeOpCodes(std::array<opCode,9> &opCodes);
 
@@ -44,10 +43,13 @@ class IntcodeComputer
 
 	void loadValues(int64_t op, int64_t adress, int64_t &a, int64_t &b, int64_t &c, std::array<int64_t, 10000> &program);
 
-	std::array<opCode,9> opCodes;
 	int64_t adressPtr = 0;
 	int64_t offset = 0;
+	std::queue<int64_t> inbox;
+	std::queue<int64_t> outbox;
+	std::array<opCode,9> opCodes;
 	bool opCodesInitialized = false;
+	bool sleeping = false;
 	
 	public:
 	
@@ -55,11 +57,12 @@ class IntcodeComputer
 	
 	void executeProgram();
 	void loadProgram(const std::vector<int64_t> &newProgram);
+	void pushValue(int64_t value);
+	int64_t fetchValue();
+	bool isSleeping();
 	
-	std::queue<int64_t> inbox;
-	std::queue<int64_t> outbox;
 	std::array<int64_t, 10000> program{0};
-	bool sleeping = false;
+
 };
 
 #endif
