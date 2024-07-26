@@ -45,8 +45,6 @@ class IntcodeComputer
 
 	int64_t adressPtr = 0;
 	int64_t offset = 0;
-	std::queue<int64_t> inbox;
-	std::queue<int64_t> outbox;
 	std::array<opCode,9> opCodes;
 	bool opCodesInitialized = false;
 	bool sleeping = false;
@@ -62,6 +60,8 @@ class IntcodeComputer
 	bool isSleeping();
 	
 	std::array<int64_t, 10000> program{0};
+	std::queue<int64_t> inbox;
+	std::queue<int64_t> outbox;
 
 };
 
